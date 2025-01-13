@@ -53,6 +53,18 @@ async function deleteMovie(id) {
     return {message}
 }
 
+async function patchMovie(id, movie) {
+   let fields = Object.keys(movie).map(
+    (field) => field+" = ?"
+   ).join(", ")
+
+   let updateValues = Object.values(movie);
+   updateValues.push(id);
+   console.log("Fields: ",fields);
+   console.log("UpdateValues: ",updateValues);
+
+   
+}
 
 
 module.exports = {
@@ -60,5 +72,6 @@ module.exports = {
     getMovieByID,
     createMovie,
     updateMovie,
-    deleteMovie
+    deleteMovie,
+    patchMovie
 };
