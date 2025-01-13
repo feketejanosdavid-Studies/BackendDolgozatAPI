@@ -11,4 +11,23 @@ router.get("/", async function(req, res, next) {
     }
 })
 
+router.post("/", async function (req, res, next) {
+    console.log("Post Movie", req.body);
+    try {
+        res.json(await movies.createMovie(req.body))
+    }
+    catch (err) {
+        next(err);
+    }
+})
+
+router.delete("/:id", async function (req, res, next) {
+    try {
+        res.json(await movies.deleteMovie(req.params.id))
+    }
+    catch (err) {
+        next(err);
+    }
+})
+
 module.exports = router;
