@@ -16,11 +16,21 @@ async function getMovie(id) {
 }
 
 async function createMovie(movie) {
+
+    // const newMovie = {
+    //     title: movie.title || "Unknown",
+    //     director: movie.director || "Unknown",
+    //     genre: movie.genre || "Unknown",
+    //     release_year: movie.release_year || null,
+    //     poster: movie.poster || null
+    // }
+
     console.log("Movie: ", movie);
     const result =await db.query(
         `INSERT INTO movies (title, director, genre, release_year, poster)
         VALUES (?, ?, ?, ?, ?)`,
         [movie.title, movie.director, movie.genre, movie.release_year, movie.poster]
+        // [newMovie.title, newMovie.director, newMovie.genre, newMovie.release_year, newMovie.poster]
     )
     let message = "movie not created"
     if (result.affectedRows) {
