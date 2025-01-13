@@ -1,6 +1,14 @@
 const express = require("express");
-
+const movieRouter = require("./routers/movies");
+const cors = require("cors");
+const bodyParser = require("body-parser");
 const app = express();
+
+require ("dotenv").config();
+
+app.use(cors({origin: "http://localhost:3000"}));
+app.use(bodyParser.json());
+app.use("/movies", movieRouter);
 
 app.get("/", (req, res) => {
     res.json({message: "Ok, working..."});
