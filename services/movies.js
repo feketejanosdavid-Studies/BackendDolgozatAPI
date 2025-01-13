@@ -1,13 +1,13 @@
 const db = require("./db");
 
-async function getDatas() {
+async function getMovies() {
     const rows = await db.query(
         `SELECT * FROM movies`
     )
     return rows?rows:[];
 }
 
-async function getMovie(id) {
+async function getMovieByID(id) {
     const rows = await db.query(
         `SELECT * FROM movies WHERE id = ?`,
         [id]
@@ -39,6 +39,18 @@ async function createMovie(movie) {
     return {message}
 }
 
+async function updateMovie(id, movie) {
+    const result = await db.query(
+        `UPDATE movies SET title = ?, director = ?, genre = ?, release_year = ?, poster = ? WHERE id = ?`,
+        [movie.title, movie.director, movie.genre, movie.release_year, movie.poster, id]
+    )
+    let message = "movie not updated"
+    if (result.affectedRows) {
+        message = "movie updated"
+    }
+    return {message}
+}
+
 async function deleteMovie(id) {
     const result = await db.query(
         `DELETE FROM movies WHERE id = ?`,
@@ -51,11 +63,25 @@ async function deleteMovie(id) {
     return {message}
 }
 
+async function patchMovie(id, movie) {
+   let fields = Object.keys(movie).map(
+    (field) => field+" = ?"
+   ).join(", ")
+
+   let updateValues = Object.values(movie);
+   updateValues.push(id);
+   console.log("Fields: ",fields);
+   console.log("UpdateValues: ",updateValues);
+
+   
+}
 
 
 module.exports = {
-    getDatas,
+    getMovies,
+    getMovieByID,
     createMovie,
-    getMovie,
-    deleteMovie
+    updateMovie,
+    deleteMovie,
+    patchMovie
 };
