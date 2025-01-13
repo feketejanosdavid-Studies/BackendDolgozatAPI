@@ -1,11 +1,11 @@
-require("dotenv").config();
-
 const config = {
     db: {
-        host: "http://localhost",
+        host: "127.0.0.1",
         user: "root",
         password: "",
         database: "backenddolgozat",
         port: 3306
     }
 }
+
+module.exports = {config}
