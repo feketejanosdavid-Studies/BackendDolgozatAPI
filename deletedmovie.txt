@@ -1,0 +1,8 @@
+ {
+        "id": 1549,
+        "title": "Journey to the Stars",
+        "director": "Unknown",
+        "genre": "Chinese",
+        "release_year": 2008,
+        "poster": "https://picsum.photos/seed/8475/150"
+    },

@@ -11,6 +11,15 @@ router.get("/", async function(req, res, next) {
     }
 })
 
+router.get("/:id", async function(req, res, next) {
+    try {
+        res.json(await movies.getMovie(req.params.id));
+    }
+    catch (err) {
+        next(err);
+    }
+})
+
 router.post("/", async function (req, res, next) {
     console.log("Post Movie", req.body);
     try {
